@@ -1,0 +1,74 @@
+.App {
+  text-align: center;
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  src: local("Roboto"), url("../src/assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 500;
+  src: local("Roboto Medium"),
+    url("../src/assets/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  src: local("Roboto Bold"), url("../src/assets/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto Light";
+  font-weight: 300;
+  src: local("Roboto Light"), url("../src/assets/fonts/Roboto/Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Karla";
+  font-weight: 700;
+  src: local("Karla Bold"), url("../src/assets/fonts/Karla/Karla-Bold.ttf") format("truetype");
+}
+
+h2 {
+  font-family: "Roboto Light", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 58px;
+}
+
+h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0.15px;
+}
+
+h4 {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 1.25px;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  letter-spacing: 0.25px;
+  color: #6e798c;
+}
