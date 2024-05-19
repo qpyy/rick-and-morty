@@ -13,6 +13,7 @@ import { filterUniqueCharacters } from "../../../helpers";
 import { getCharactersService, getFilteredByNameService } from "../../../services";
 import RickAndMorty from "../../../assets/images/RickAndMorty.svg";
 import { StyledCharacters, StyledImage, StyledCharactersGrid } from "./style";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
@@ -25,21 +26,10 @@ const Characters = () => {
     message: "",
   });
   const isMobile = useMediaQuery("(max-width:600px)");
+  const debouncedNameFilter = useDebounce(nameFilter, 500);
 
   const options = [
     { value: "Species", label: "Species" },
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-  ];
-
-  const options1 = [
-    { value: "Gender", label: "Gender" },
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-  ];
-
-  const options2 = [
-    { value: "Status", label: "Status" },
     { value: "option1", label: "Option 1" },
     { value: "option2", label: "Option 2" },
   ];
@@ -57,12 +47,12 @@ const Characters = () => {
   }, [status.isLoading]);
 
   useEffect(() => {
-    if (nameFilter) {
+    if (debouncedNameFilter) {
       filterCharactersByName();
     } else {
       getCharacters();
     }
-  }, [currentPage, nameFilter]);
+  }, [currentPage, debouncedNameFilter]);
 
   const getCharacters = async () => {
     try {
@@ -78,7 +68,7 @@ const Characters = () => {
   const filterCharactersByName = async () => {
     try {
       setCharacters([]);
-      const response = await getFilteredByNameService(nameFilter);
+      const response = await getFilteredByNameService(debouncedNameFilter);
       setCharacters(response);
       setCurrentPage(1);
     } catch (error) {
@@ -89,6 +79,7 @@ const Characters = () => {
   const handleNameChange = (event) => {
     setStatus({ ...status, error: "" });
     setNameFilter(event.target.value);
+    setCharacters([]);
     setCurrentPage(1);
   };
 
@@ -114,8 +105,8 @@ const Characters = () => {
           <CustomInput placeholderValue="Filter by name..." changeAction={handleNameChange} />
           <Modal>
             <CustomSelect options={options} defaultValue="Species" />
-            <CustomSelect options={options1} defaultValue="Gender" />
-            <CustomSelect options={options2} defaultValue="Status" />
+            <CustomSelect options={options} defaultValue="Gender" />
+            <CustomSelect options={options} defaultValue="Status" />
             <CustomButton buttonText="APPLY" width="280px" height="36px" />
           </Modal>
         </>
@@ -123,8 +114,8 @@ const Characters = () => {
         <Filters>
           <CustomInput placeholderValue="Filter by name..." changeAction={handleNameChange} />
           <CustomSelect options={options} defaultValue="Species" />
-          <CustomSelect options={options1} defaultValue="Gender" />
-          <CustomSelect options={options2} defaultValue="Status" />
+          <CustomSelect options={options} defaultValue="Gender" />
+          <CustomSelect options={options} defaultValue="Status" />
         </Filters>
       )}
       {status.isLoading ? (
